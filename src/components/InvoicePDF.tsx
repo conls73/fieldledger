@@ -1,6 +1,3 @@
-import { NextResponse } from 'next/server';
-import { renderToStream } from '@react-pdf/renderer';
-import React from 'react';
 import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 // Styles for PDF
@@ -17,7 +14,7 @@ const styles = StyleSheet.create({
   tableCell: { margin: "auto", marginTop: 5, fontSize: 10, padding: 4 }
 });
 
-const InvoicePDF = ({ invoiceId }: { invoiceId: string }) => (
+export const InvoicePDF = ({ invoiceId }: { invoiceId: string }) => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.header}>
@@ -53,21 +50,3 @@ const InvoicePDF = ({ invoiceId }: { invoiceId: string }) => (
     </Page>
   </Document>
 );
-
-export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
-  const id = searchParams.get('id') || 'INV-000';
-
-  try {
-    const stream = await renderToStream(<InvoicePDF invoiceId={id} />);
-    return new NextResponse(stream as unknown as ReadableStream, {
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': `attachment; filename="invoice-${id}.pdf"`,
-      },
-    });
-  } catch (error) {
-    console.error('Failed to generate PDF:', error);
-    return new NextResponse('Error generating PDF', { status: 500 });
-  }
-}

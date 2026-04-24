@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Plus, ArrowUpRight, Search, CircleDollarSign } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 
@@ -23,11 +23,11 @@ export default function IncomePage() {
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input type="search" placeholder="Search income..." className="pl-8 bg-background/50 border-border/50" />
           </div>
-          <Button className="shrink-0 group bg-emerald-600 hover:bg-emerald-700 text-white" asChild>
-            <Link href="/income/new">
+          <Link to="/income/new">
+            <Button className="shrink-0 group bg-emerald-600 hover:bg-emerald-700 text-white">
               <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90" /> Add Income
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </div>
       </div>
 

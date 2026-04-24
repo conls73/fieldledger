@@ -1,7 +1,5 @@
-"use client";
-
 import { Leaf } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,7 +12,7 @@ export default function LoginPage() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 blur-3xl rounded-full pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 blur-3xl rounded-full pointer-events-none" />
 
-      <Link href="/" className="absolute top-8 left-8 flex items-center gap-3 hover:opacity-80 transition-opacity z-10 group">
+      <Link to="/" className="absolute top-8 left-8 flex items-center gap-3 hover:opacity-80 transition-opacity z-10 group">
         <div className="bg-primary/10 p-2 rounded-lg shadow-sm border border-primary/20 group-hover:bg-primary/20 transition-colors">
           <Leaf className="w-6 h-6 text-primary" />
         </div>
@@ -36,7 +34,7 @@ export default function LoginPage() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="password">Password</Label>
-              <Link href="#" className="text-sm font-medium text-primary hover:underline">
+              <Link to="#" className="text-sm font-medium text-primary hover:underline">
                 Forgot password?
               </Link>
             </div>
@@ -44,12 +42,12 @@ export default function LoginPage() {
           </div>
         </CardContent>
         <CardFooter className="flex flex-col gap-4">
-          <Button className="w-full h-12 text-md font-medium" asChild>
-            <Link href="/dashboard">Log in</Link>
-          </Button>
+          <Link to="/dashboard" className="w-full">
+            <Button className="w-full h-12 text-md font-medium">Log in</Button>
+          </Link>
           <div className="text-center text-sm text-muted-foreground w-full">
             Don&apos;t have an account?{" "}
-            <Link href="/signup" className="text-primary font-medium hover:underline">
+            <Link to="/signup" className="text-primary font-medium hover:underline">
               Sign up
             </Link>
           </div>

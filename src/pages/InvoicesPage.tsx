@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { Plus, FileText, Download, MoreHorizontal } from "lucide-react";
-import Link from "next/link";
+import { Plus, FileText, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import { InvoicePDF } from '@/components/InvoicePDF';
 
 const mockInvoices = [
   { id: "INV-2026-005", customer: "Valley Farms Co-op", date: "Apr 20, 2026", amount: "$890.00", status: "sent" },
@@ -17,11 +19,11 @@ export default function InvoicesPage() {
           <h1 className="text-3xl font-bold tracking-tight">Invoices</h1>
           <p className="text-muted-foreground mt-1">Manage and track your customer invoicing.</p>
         </div>
-        <Button className="shrink-0 group" asChild>
-          <Link href="/invoices/new">
+        <Link to="/invoices/new">
+          <Button className="shrink-0 group">
             <Plus className="mr-2 h-4 w-4 transition-transform group-hover:rotate-90" /> New Invoice
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
 
       <div className="glass rounded-xl border border-border/50 overflow-hidden shadow-sm">
@@ -56,9 +58,13 @@ export default function InvoicesPage() {
                     </Badge>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <Button variant="ghost" size="icon" className="hover:text-primary">
-                      <Download className="h-4 w-4" />
-                    </Button>
+                    <PDFDownloadLink document={<InvoicePDF invoiceId={inv.id} />} fileName={`invoice-${inv.id}.pdf`}>
+                      {({ loading }) => (
+                        <Button variant="ghost" size="icon" className="hover:text-primary" disabled={loading}>
+                          <Download className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </PDFDownloadLink>
                   </td>
                 </tr>
               ))}

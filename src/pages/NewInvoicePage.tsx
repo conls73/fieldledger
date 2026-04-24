@@ -1,8 +1,6 @@
-"use client";
-
 import { useForm, useFieldArray } from "react-hook-form";
 import { Plus, Trash2, ArrowLeft, Save } from "lucide-react";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,7 +25,7 @@ export default function NewInvoicePage() {
 
   const watchItems = watch("items");
   
-  const subtotal = watchItems.reduce((acc, item) => acc + (item.quantity * item.unitPrice), 0);
+  const subtotal = watchItems.reduce((acc, item) => acc + ((item.quantity || 0) * (item.unitPrice || 0)), 0);
   const taxRate = 0.08; // 8% tax example
   const tax = subtotal * taxRate;
   const total = subtotal + tax;
@@ -40,11 +38,11 @@ export default function NewInvoicePage() {
   return (
     <>
       <div className="flex items-center gap-4 mb-8">
-        <Button variant="outline" size="icon" asChild>
-          <Link href="/invoices">
+        <Link to="/invoices">
+          <Button variant="outline" size="icon">
             <ArrowLeft className="h-4 w-4" />
-          </Link>
-        </Button>
+          </Button>
+        </Link>
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Create Invoice</h1>
           <p className="text-muted-foreground mt-1">Draft a new invoice for your customers.</p>

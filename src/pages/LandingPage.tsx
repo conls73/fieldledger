@@ -1,9 +1,8 @@
-import Link from "next/link";
-import Image from "next/image";
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Leaf, ArrowRight, TrendingUp, DollarSign, FileText } from "lucide-react";
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden">
       {/* Background decoration */}
@@ -26,12 +25,12 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 mb-20 w-full md:w-auto px-4">
-          <Link href="/dashboard" className="w-full sm:w-auto">
+          <Link to="/dashboard" className="w-full sm:w-auto">
             <Button size="lg" className="w-full sm:w-auto bg-primary hover:bg-accent text-white h-14 px-8 rounded-full text-lg shadow-xl shadow-primary/20 transition-all hover:scale-105">
               Enter FieldLedger <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </Link>
-          <Link href="/login" className="w-full sm:w-auto">
+          <Link to="/login" className="w-full sm:w-auto">
             <Button size="lg" variant="outline" className="w-full sm:w-auto h-14 px-8 rounded-full text-lg border-primary/20 hover:bg-primary/5 transition-all">
               Log In
             </Button>
